@@ -1,0 +1,66 @@
+name: Compare Branches and Generate Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      source-branch:
+        description: 'Source branch to compare'
+        required: true
+        default: 'devorg_p1'
+      target-branch:
+        description: 'Target branch to compare against'
+        required: true
+        default: 'main'
+
+jobs:
+  compare-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set Up Git
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+
+    - name: Compare Branches
+      id: compare
+      run: |
+        # Fetch all branches
+        git fetch --all
+
+        # Get the branches from input
+        SOURCE_BRANCH=${{ github.event.inputs['source-branch'] }}
+        TARGET_BRANCH=${{ github.event.inputs['target-branch'] }}
+
+        echo "Comparing $SOURCE_BRANCH with $TARGET_BRANCH"
+
+        # List changed files
+        git diff --name-only $TARGET_BRANCH...$SOURCE_BRANCH > changed_files.txt
+
+        # Generate the diff stat
+        git diff --stat $TARGET_BRANCH...$SOURCE_BRANCH > diff_stat.txt
+
+        # Loop through each changed file to calculate its size
+        echo "File sizes:" > file_sizes.txt
+        while IFS= read -r file; do
+          size=$(du -sh "$file" | cut -f1)
+          echo "File: $file, Size: $size" >> file_sizes.txt
+        done < changed_files.txt
+
+        # Combine the results
+        echo "Total Changes:" > report.txt
+        cat diff_stat.txt >> report.txt
+        echo "" >> report.txt
+        cat file_sizes.txt >> report.txt
+
+    - name: Display Report
+      run: cat report.txt
+
+    - name: Upload Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: PR-Size-Report
+        path: report.txt
