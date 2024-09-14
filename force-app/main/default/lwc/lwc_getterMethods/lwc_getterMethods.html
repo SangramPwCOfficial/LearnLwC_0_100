@@ -1,0 +1,18 @@
+<!--
+  @description       : 
+  @author            : Sangram Keshari Upadhyaya
+  @group             : 
+  @last modified on  : 14-09-2024
+  @last modified by  : Sangram Keshari Upadhyaya
+  Modifications Log
+  Ver   Date         Author                      Modification
+  1.0   14-09-2024   Sangram Keshari Upadhyaya   Initial Version
+-->
+  
+<template>
+    <lightning-card title="Getter Demo">
+        <div class="slds-p-horizontal_small">Active Users</div>
+        <lightning-input class="slds-p-horizontal_small" placeholder="Enter user Unique Number" type="number" onkeyup={getUniqueNumber}></lightning-input><br>
+        <div class="slds-p-horizontal_small"><b>{activeUsersNames}</b></div>
+    </lightning-card>
+</template>
