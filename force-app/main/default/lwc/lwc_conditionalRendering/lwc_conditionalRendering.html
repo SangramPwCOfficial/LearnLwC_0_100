@@ -1,0 +1,80 @@
+<!--
+  @description       : 
+  @author            : Sangram Keshari Upadhyaya
+  @group             : 
+  @last modified on  : 15-09-2024
+  @last modified by  : Sangram Keshari Upadhyaya
+  Modifications Log
+  Ver   Date         Author                      Modification
+  1.0   15-09-2024   Sangram Keshari Upadhyaya   Initial Version
+-->
+<template>
+    <lightning-card title="Conditional Rendering">
+
+        <lightning-input type="checkbox" required label="Show Details" onchange={handleChange} class="slds-m-horizontal_small"></lightning-input><br>
+        <template if:true={isVisible}>
+            <div class="slds-m-horizontal_small">
+                <ul class="slds-list_dotted slds-m-horizontal_small">
+                    <li>The expression can be a JavaScript identifier(property)</li>
+                    <li>The expression can be a JavaScript dot notation that accesses a property from an object (user.fullName)</li>
+                    <li>We can't use ternary operator inside the expression</li>
+                    <li>To compute the value of the expression, use a getter in the JavaScript class.</li>
+                </ul><br>
+
+                <div style="color: red;">This is to test <b>if:true</b> directive.</div>
+            </div>
+        </template><br>
+
+        <div class="slds-p-horizontal_small"><b>Click on the button to know more</b></div><br>
+        <lightning-button variant="brand" label="lwc:if" value="if" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="lwc:elseif" value="elseIf" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="lwc:else" value="else" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="destructive" label="Reset" onclick={handleClick} class="slds-m-left_x-small"></lightning-button><br>
+
+        <lightning-card>
+
+            <template lwc:if={ifButtonClicked}>
+                <lightning-card class="slds-m-horizontal_small" title="lwc:if={condition}">
+                    <div class="slds-p-horizontal_medium">
+                        This directive is used to render DOM elements in a template, if the expression is "<b>true</b>".
+                    </div><br>
+                    <div class="slds-p-horizontal_small"><b>Syntax :: </b></div><br>
+                    <div class="slds-p-horizontal_small">{ifButtonSyntax}</div><br>
+                    
+                </lightning-card>
+            </template>
+
+            <template lwc:elseif={elseIfButtonClicked}>
+                <lightning-card class="slds-m-horizontal_small" title="lwc:elseif={condition}">
+                    <div class="slds-p-horizontal_medium">
+                        This directive is used to render DOM elements in a template, if the expression is "<b>true</b>".
+                    </div><br>
+                    <div class="slds-p-horizontal_small"><b>Syntax :: </b></div><br>
+                    <div class="slds-p-horizontal_small">{elseIfButtonSyntax}</div><br>
+                </lightning-card>
+            </template>
+
+            <template lwc:elseif={elseButtonClicked}>
+                <lightning-card class="slds-m-horizontal_small" title="lwc:else">
+                    <div class="slds-p-horizontal_medium">
+                        This directive is used to render DOM elements in a template, if the expression is "<b>true</b>".
+                    </div><br>
+                    <div class="slds-p-horizontal_small"><b>Syntax :: </b></div><br>
+                    <div class="slds-p-horizontal_small">{elseButtonSyntax}</div><br>
+                </lightning-card>
+            </template>
+
+            <template lwc:else>
+                <div class="slds-p-horizontal_small"></div>
+            </template>
+
+        </lightning-card>
+
+        <div class="slds-p-horizontal_small"><b>Conditional Rendering using Getters</b></div>
+        <lightning-input type="text" placeholder="Enter the secret phrase" onkeyup={checkCorrectPhrase} class="slds-m-horizontal_small"></lightning-input><br>
+        <template lwc:if={checkSecretPhraseMethod}>
+            <div class="slds-p-horizontal_small">Please note the details it will closed in 5 seconds.</div>
+        </template>
+
+    </lightning-card>    
+</template>
