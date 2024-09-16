@@ -1,0 +1,47 @@
+<!--
+  @description       : 
+  @author            : Sangram Keshari Upadhyaya
+  @group             : 
+  @last modified on  : 16-09-2024
+  @last modified by  : Sangram Keshari Upadhyaya
+  Modifications Log
+  Ver   Date         Author                      Modification
+  1.0   16-09-2024   Sangram Keshari Upadhyaya   Initial Version
+-->
+<template>
+    <lightning-card title="Employee Details - forEach" icon-name="custom:custom14">
+        <template for:each={employeeList} for:item="currentEmployee">
+            <div key={currentEmployee.UID} class="card-container">
+                <lightning-card title={currentEmployee.Name}>
+                    <div class="slds-p-horizontal_medium">
+                        <p style="color: red;">UID : {currentEmployee.UID}</p>
+                        <p>Age : {currentEmployee.Age}</p>
+                        <p>Base Location : <b>{currentEmployee.City}</b></p>
+                    </div>
+                </lightning-card>
+            </div>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Vehicle Details - iterator" icon-name="custom:custom13">
+        <div class="slds-p-around_medium">
+            <template iterator:cars={carList}>
+                <ul key={cars.value.Brand} class="slds-has-dividers_around-space">
+                    <li class="slds-item">
+                        <p><strong>{cars.value.Brand}</strong></p>
+                        <p>{cars.value.Price}</p>
+                        <p>{cars.value.Seller}</p>
+                        <div class="slds-theme_shade">
+                            <template lwc:if={cars.first}>
+                                <br><p>This is the <b>first</b> Car in the List</p>
+                            </template>
+                            <template lwc:if={cars.last}>
+                                <br><p>This is the <b>last</b> Car in the List</p>
+                            </template>
+                        </div>
+                    </li>
+                </ul>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Sangram Keshari Upadhyaya
+  @group             : 
+  @last modified on  : 13-09-2024
+  @last modified by  : Sangram Keshari Upadhyaya
+  Modifications Log
+  Ver   Date         Author                      Modification
+  1.0   11-09-2024   Sangram Keshari Upadhyaya   Initial Version
+-->
+  
+<template>
+    <lightning-card title="Track Address with @track">
+        <div class="slds-p-horizontal_small"><b>Update Address</b></div>
+        <lightning-input class="slds-p-horizontal_small" type="text" onkeyup={handleCityChange} placeholder="City"></lightning-input>
+        <lightning-input class="slds-p-horizontal_small" type="text" onkeyup={handleStreetChange} placeholder="Street"></lightning-input>
+        <lightning-input class="slds-p-horizontal_small" type="text" onkeyup={handleStateChange} placeholder="State"></lightning-input>
+        <lightning-input class="slds-p-horizontal_small" type="text" onkeyup={handleZipChange} placeholder="Zip"></lightning-input><br>
+        <div class="slds-p-horizontal_small"><b>Current Address</b></div>   
+        <div class="slds-p-horizontal_small">Your address is : {address.street}, {address.city} - {address.zip}, {address.state}</div>
+    </lightning-card>
+
+    <lightning-card title="Track Address without @track">
+      <div class="slds-p-horizontal_small"><b>Update Address City</b></div>
+      <lightning-input class="slds-p-horizontal_small" placeholder="Enter new city" onkeyup={handleAddessCityChange}></lightning-input><br>
+      <div class="slds-p-horizontal_small"><b>Current City</b></div>   
+      <div class="slds-p-horizontal_small">Your address is : {addressLine.city} - {addressLine.zip}, {addressLine.state}, {addressLine.Street}</div>
+    </lightning-card>
+</template>
