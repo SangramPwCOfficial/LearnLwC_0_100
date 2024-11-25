@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : Sangram Keshari Upadhyaya
+  @group             : 
+  @last modified on  : 02-09-2024
+  @last modified by  : Sangram Keshari Upadhyaya
+  Modifications Log
+  Ver   Date         Author                      Modification
+  1.0   02-09-2024   Sangram Keshari Upadhyaya   Initial Version
+-->
+
+<template>
+    
+    <lightning-card title="First Card">    
+        <div class="slds-p-horizontal_small">Hello World!</div>
+    </lightning-card>
+
+    <!-- Two-way Data Binding -->
+    <lightning-card  title="Details">
+        <div class="slds-p-horizontal_small">The username of {fname} is {details.username}</div>
+        <lightning-input class="slds-p-horizontal_small" type="text" onkeyup={handleTitleChange} placeholder="Enter your role"></lightning-input>
+        <p class="slds-p-horizontal_small">His role is {role}</p>
+        <p slot="footer">Footer</p>
+    </lightning-card>
+
+</template>
